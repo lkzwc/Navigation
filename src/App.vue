@@ -1,77 +1,69 @@
 <script setup>
-import ContactInfo from './components/ContactInfo.vue'
-
-const navLinks = [
-  { name: '首页', url: '#' },
-  { name: '产品服务', url: '#' },
-  { name: '关于我们', url: '#' },
-]
-
-const cardLinks = [
-  { title: '业务系统', url: '#', color: 'bg-blue-600' },
-  { title: '客户门户', url: '#', color: 'bg-emerald-600' },
-  { title: '管理后台', url: '#', color: 'bg-violet-600' },
-  { title: '文档中心', url: '#', color: 'bg-amber-600' },
-]
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <nav class="bg-white shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
-            <span class="text-blue-600">企业</span>导航
-          </h1>
-          <div class="hidden md:flex space-x-8">
-            <a 
-              v-for="link in navLinks"
-              :key="link.name"
-              :href="link.url"
-              class="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md transition-colors"
-            >
-              {{ link.name }}
-            </a>
-          </div>
-        </div>
+  <div class="min-h-screen flex flex-col bg-gray-50">
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-md">
+      <nav class="container mx-auto flex justify-between items-center py-4 px-4 md:px-0">
+        <div class="text-xl font-bold text-blue-600">导航站</div>
+        <ul class="hidden md:flex space-x-8 text-gray-700 font-medium">
+          <li><a href="#official" class="hover:text-blue-500">官网</a></li>
+          <li><a href="#simcard" class="hover:text-blue-500">流量卡</a></li>
+          <li><a href="#numbercard" class="hover:text-blue-500">号卡</a></li>
+          <li><a href="#wifi" class="hover:text-blue-500">WiFi</a></li>
+        </ul>
+        <button class="md:hidden flex items-center px-2 py-1 border rounded text-gray-700 border-gray-400" @click="showMenu = !showMenu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </nav>
+      <!-- 移动端菜单 -->
+      <div v-if="showMenu" class="md:hidden bg-white border-t">
+        <ul class="flex flex-col px-4 py-2 space-y-2">
+          <li><a href="#official" class="block py-2 hover:text-blue-500">官网</a></li>
+          <li><a href="#simcard" class="block py-2 hover:text-blue-500">流量卡</a></li>
+          <li><a href="#numbercard" class="block py-2 hover:text-blue-500">号卡</a></li>
+          <li><a href="#wifi" class="block py-2 hover:text-blue-500">WiFi</a></li>
+        </ul>
       </div>
-    </nav>
+    </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <a
-          v-for="(card, index) in cardLinks"
-          :key="card.title"
-          :href="card.url"
-          class="group relative flex items-center justify-center h-48 rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
-          :class="card.color"
-        >
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
-          <h3 class="text-xl font-semibold text-white relative z-10">
-            {{ card.title }}
-          </h3>
-        </a>
-      </div>
+    <!-- 内容区块 -->
+    <main class="flex-1 container mx-auto px-4 py-8 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <section id="official" class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-2xl font-semibold mb-2">官网</div>
+        <a href="https://your-official-site.com" target="_blank" class="text-blue-500 underline">访问官网</a>
+      </section>
+      <section id="simcard" class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-2xl font-semibold mb-2">流量卡</div>
+        <a href="https://your-simcard-link.com" target="_blank" class="text-blue-500 underline">查看流量卡</a>
+      </section>
+      <section id="numbercard" class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-2xl font-semibold mb-2">号卡</div>
+        <a href="https://your-numbercard-link.com" target="_blank" class="text-blue-500 underline">查看号卡</a>
+      </section>
+      <section id="wifi" class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+        <div class="text-2xl font-semibold mb-2">WiFi</div>
+        <a href="https://your-wifi-link.com" target="_blank" class="text-blue-500 underline">查看WiFi</a>
+      </section>
     </main>
 
-    <ContactInfo class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" />
+    <!-- 联系方式 -->
+    <footer class="bg-white border-t py-6 mt-8">
+      <div class="container mx-auto text-center text-gray-600">
+        联系方式：微信 15556355573 &nbsp;|&nbsp; QQ 15556355573 &nbsp;|&nbsp; 邮箱 your@email.com
+      </div>
+    </footer>
   </div>
 </template>
 
-<style scoped>
-/* 自定义渐变动画 */
-.hover-gradient {
-  background-size: 200% auto;
-  background-image: linear-gradient(
-    to right,
-    #3b82f6 0%,
-    #6366f1 50%,
-    #3b82f6 100%
-  );
-  transition: background-position 0.5s ease;
-}
+<script setup>
+import { ref } from 'vue'
+const showMenu = ref(false)
+</script>
 
-.hover-gradient:hover {
-  background-position: right center;
+<style>
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 </style>
